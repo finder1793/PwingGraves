@@ -28,9 +28,14 @@ public class PwingGraves extends JavaPlugin implements Listener {
     private AdminGUI adminGUI;
     private PlayerManager playerManager;
     private RespawnEconomy respawnEconomy;
-
     @Override
     public void onEnable() {
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_GRAY + "----------------------------------------");
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "PwingGraves " + ChatColor.WHITE + "v" + getDescription().getVersion());
+        getServer().getConsoleSender().sendMessage(ChatColor.YELLOW + "Created by: " + ChatColor.WHITE + "Finder17");
+        getServer().getConsoleSender().sendMessage(ChatColor.YELLOW + "Status: " + ChatColor.GREEN + "Enabled");
+        getServer().getConsoleSender().sendMessage(ChatColor.DARK_GRAY + "----------------------------------------");
+        
         ConfigurationSerialization.registerClass(RespawnPoint.class);
         
         worldConfigManager = new WorldConfigManager(getDataFolder());
@@ -54,6 +59,7 @@ public class PwingGraves extends JavaPlugin implements Listener {
                 respawnEconomy = new RespawnEconomy(economy, createCost, teleportCost);
             }
         }
+    }
     }
     @Override
     public void onDisable() {
