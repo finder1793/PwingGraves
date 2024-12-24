@@ -18,9 +18,9 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import ch.njol.skript.Skript;
 import com.pwing.graves.integrations.skript.EffectCreatePoint;
 import com.pwing.graves.integrations.skript.CondRespawnPointExists;
+import org.bukkit.ChatColor;
 
-
-public class PwingGraves extends JavaPlugin implements Listener {
+public final class PwingGraves extends JavaPlugin implements Listener {
     
     private RespawnManager respawnManager;
     private WorldConfigManager worldConfigManager;
@@ -28,6 +28,7 @@ public class PwingGraves extends JavaPlugin implements Listener {
     private AdminGUI adminGUI;
     private PlayerManager playerManager;
     private RespawnEconomy respawnEconomy;
+
     @Override
     public void onEnable() {
         getServer().getConsoleSender().sendMessage(ChatColor.DARK_GRAY + "----------------------------------------");
@@ -43,7 +44,6 @@ public class PwingGraves extends JavaPlugin implements Listener {
         respawnGUI = new RespawnGUI(this);
         adminGUI = new AdminGUI(this);
         playerManager = new PlayerManager(this);
-        
         getServer().getPluginManager().registerEvents(this, this);
         getCommand("graves").setExecutor(new GravesCommand(this));
         
@@ -59,8 +59,10 @@ public class PwingGraves extends JavaPlugin implements Listener {
                 respawnEconomy = new RespawnEconomy(economy, createCost, teleportCost);
             }
         }
+        
+        registerSkript();
     }
-    }
+
     @Override
     public void onDisable() {
         worldConfigManager.saveAll();
@@ -78,6 +80,7 @@ public class PwingGraves extends JavaPlugin implements Listener {
     public PlayerManager getPlayerManager() {
         return playerManager;
     }
+
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         if (event.getPlayer().getLastDeathLocation() != null) {
@@ -109,7 +112,6 @@ public class PwingGraves extends JavaPlugin implements Listener {
             getLogger().info("Registering Skript support...");
             EffectCreatePoint.setPlugin(this);
             CondRespawnPointExists.setPlugin(this);
-            // Register effects and conditions
             Skript.registerEffect(EffectCreatePoint.class);
             Skript.registerCondition(CondRespawnPointExists.class);
         }
