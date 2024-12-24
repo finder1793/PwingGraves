@@ -1,0 +1,32 @@
+# Gradle
+.gradle/
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.settings/
+.project
+.classpath
+.vscode/
+
+# Compiled files
+bin/
+target/
+out/
+*.class
+
+# Logs
+logs/
+*.log
+
+# Runtime files
+run/
+
+# OS specific
+.DS_Store
+Thumbs.db

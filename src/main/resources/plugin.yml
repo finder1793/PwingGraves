@@ -1,0 +1,32 @@
+name: PwingGraves
+version: '${version}'
+main: com.pwing.graves.PwingGraves
+api-version: '1.20'
+description: A No BS Checkpoint/Respawn System
+
+commands:
+  graves:
+    description: Main command for PwingGraves
+    usage: /graves <add|remove> <name>
+
+permissions:
+  pwinggraves.admin:
+    description: Allows management of respawn points
+    default: op
+  pwinggraves.personal.points.3:
+    description: Allows creation of up to 3 personal respawn points
+    default: true
+  pwinggraves.personal.points.5:
+    description: Allows creation of up to 5 personal respawn points
+    default: false
+  pwinggraves.personal.points.10:
+    description: Allows creation of up to 10 personal respawn points
+    default: false
+  pwinggraves.use.*:
+    description: Allows usage of all respawn points
+    default: true
+  pwinggraves.bypass.cooldown:
+    description: Bypasses respawn point cooldowns
+  pwinggraves.menu:
+    description: Allows access to the respawn points GUI
+    default: true    default: op    default: op

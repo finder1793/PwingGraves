@@ -1,0 +1,44 @@
+# PwingGraves Configuration
+settings:
+  default-to-world-spawn: true
+
+cooldowns:
+  respawn: 300 # Cooldown in seconds between respawn point usage
+
+permissions:
+  personal-respawns:
+    disabled-worlds:
+      - world_nether
+      - world_the_end
+    default-max-points: 3
+    groups:
+      vip:
+        max-points: 5
+      mvp:
+        max-points: 10
+
+messages:
+  respawn-point-added: "&aRespawn point %name% has been added!"
+  respawn-point-removed: "&cRespawn point %name% has been removed!"
+  no-permission: "&cYou don't have permission to use this command!"
+  cooldown-active: "&cYou must wait %time% seconds before using another respawn point!"
+  max-personal-points: "&cYou have reached your maximum number of personal respawn points!"
+  point-created: "&aPersonal respawn point created: %name%"
+
+economy:
+  enabled: true
+  costs:
+    point-creation: 1000.0
+    teleport: 100.0
+
+integrations:
+  discord:
+    enabled: false
+    webhook-url: ""
+    notifications:
+      point-creation: true
+      point-deletion: true
+  
+  worldguard:
+    enabled: true
+    prevent-creation-in-regions: true
