@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.pwing.graves"
-version = "1.0.2"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -23,6 +23,9 @@ dependencies {
     compileOnly("com.github.SkriptLang:Skript:2.6.4")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.7")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.guava:guava:32.1.3-jre")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+
 }
 java {
     toolchain {

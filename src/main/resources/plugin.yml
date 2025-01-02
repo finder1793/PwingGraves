@@ -1,5 +1,5 @@
 name: PwingGraves
-version: '1.0.2'
+version: '1.0.3'
 main: com.pwing.graves.PwingGraves
 api-version: '1.20'
 description: A No BS Checkpoint/Respawn System
