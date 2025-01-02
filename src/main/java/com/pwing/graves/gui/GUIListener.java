@@ -1,7 +1,6 @@
 package com.pwing.graves.gui;
 
 import com.pwing.graves.PwingGraves;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +17,7 @@ public class GUIListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
         
-        if (!event.getView().getTitle().equals(ChatColor.DARK_PURPLE + "Respawn Points")) return;
+        if (!event.getView().getTitle().equals(plugin.getMessageManager().getMessage("gui.respawn-title"))) return;
 
         event.setCancelled(true);
 

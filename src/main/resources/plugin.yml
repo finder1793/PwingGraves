@@ -1,5 +1,5 @@
 name: PwingGraves
-version: '1.0.1'
+version: '1.0.2'
 main: com.pwing.graves.PwingGraves
 api-version: '1.20'
 description: A No BS Checkpoint/Respawn System
@@ -8,11 +8,17 @@ softdepends: [Skript, Vault]
 commands:
   graves:
     description: Main command for PwingGraves
-    usage: /graves <add|remove> <name>
+    usage: /graves <add|remove|list|tp> <name>
 
 permissions:
   pwinggraves.admin:
     description: Allows management of respawn points
+    default: op
+  pwinggraves.list:
+    description: Allows listing of respawn points
+    default: true
+  pwinggraves.tp:
+    description: Allows teleporting to respawn points
     default: op
   pwinggraves.personal.points.3:
     description: Allows creation of up to 3 personal respawn points

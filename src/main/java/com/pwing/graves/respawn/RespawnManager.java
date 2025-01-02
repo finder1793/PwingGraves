@@ -40,8 +40,8 @@ public class RespawnManager {
         }
 
         return worldRespawnPoints.get(world.getName()).stream()
-                .min(Comparator.comparingDouble(point -> 
-                    point.getLocation().distanceSquared(deathLocation)))
+                .min(Comparator.comparingDouble(point ->
+                        point.getLocation().distanceSquared(deathLocation)))
                 .map(RespawnPoint::getLocation)
                 .orElse(world.getSpawnLocation());
     }
@@ -49,14 +49,14 @@ public class RespawnManager {
     public void loadRespawnPoints(String world) {
         WorldConfig worldConfig = plugin.getWorldConfigManager().getWorldConfig(world);
         List<?> points = worldConfig.getConfig().getList("respawn-points", new ArrayList<>());
-    
+
         Set<RespawnPoint> respawnPoints = new HashSet<>();
         for (Object obj : points) {
             if (obj instanceof RespawnPoint point) {
                 respawnPoints.add(point);
             }
         }
-    
+
         worldRespawnPoints.put(world, respawnPoints);
     }
 
@@ -74,8 +74,8 @@ public class RespawnManager {
 
     public String getNearestPointName(Location location) {
         RespawnPoint nearest = worldRespawnPoints.get(location.getWorld().getName()).stream()
-                .min(Comparator.comparingDouble(point -> 
-                    point.getLocation().distanceSquared(location)))
+                .min(Comparator.comparingDouble(point ->
+                        point.getLocation().distanceSquared(location)))
                 .orElse(null);
         return nearest != null ? nearest.getName() : "None";
     }
@@ -87,7 +87,20 @@ public class RespawnManager {
 
     public boolean pointExists(String name) {
         return worldRespawnPoints.values().stream()
-            .flatMap(Set::stream)
-            .anyMatch(point -> point.getName().equals(name));
+                .flatMap(Set::stream)
+                .anyMatch(point -> point.getName().equals(name));
+    }
+
+
+    public Set<RespawnPoint> getRespawnPoints(String worldName) {
+        return worldRespawnPoints.getOrDefault(worldName, new HashSet<>());
+    }
+
+    public RespawnPoint getRespawnPoint(String worldName, String pointName) {
+        Set<RespawnPoint> worldPoints = getRespawnPoints(worldName);
+        return worldPoints.stream()
+            .filter(point -> point.getName().equalsIgnoreCase(pointName))
+            .findFirst()
+            .orElse(null);
     }
 }

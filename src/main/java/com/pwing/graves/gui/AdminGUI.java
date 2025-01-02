@@ -15,7 +15,9 @@ import java.util.List;
 
 public class AdminGUI {
     private final PwingGraves plugin;
-    private static final String ADMIN_TITLE = ChatColor.RED + "Admin Control Panel";
+    private String getAdminTitle() {
+        return plugin.getMessageManager().getMessage("gui.admin-title");
+    }
 
     public AdminGUI(PwingGraves plugin) {
         this.plugin = plugin;
@@ -26,33 +28,30 @@ public class AdminGUI {
             return;
         }
 
-        Inventory gui = Bukkit.createInventory(null, 54, ADMIN_TITLE);
+        Inventory gui = Bukkit.createInventory(null, 54, plugin.getMessageManager().getMessage("gui.admin.title"));
 
         // World Points Manager
         ItemStack worldPoints = createGuiItem(Material.BEACON,
-            ChatColor.GOLD + "World Points Manager",
-            ChatColor.GRAY + "Manage all world respawn points",
-            ChatColor.YELLOW + "Left-click to view/edit",
-            ChatColor.RED + "Right-click to remove");
+            plugin.getMessageManager().getMessage("gui.admin.world-points.title"),
+            plugin.getMessageManager().getMessage("gui.admin.world-points.lore"));
         gui.setItem(20, worldPoints);
 
         // Create New Point
         ItemStack newPoint = createGuiItem(Material.EMERALD_BLOCK,
-            ChatColor.GREEN + "Create New Point",
-            ChatColor.GRAY + "Create a new respawn point",
-            ChatColor.YELLOW + "Click to create at your location");
+            plugin.getMessageManager().getMessage("gui.admin.new-point.title"),
+            plugin.getMessageManager().getMessage("gui.admin.new-point.lore"));
         gui.setItem(24, newPoint);
 
         // World Settings
         ItemStack worldSettings = createGuiItem(Material.COMMAND_BLOCK,
-            ChatColor.AQUA + "World Settings",
-            ChatColor.GRAY + "Configure world-specific settings");
+            plugin.getMessageManager().getMessage("gui.admin.world-settings.title"),
+            plugin.getMessageManager().getMessage("gui.admin.world-settings.lore"));
         gui.setItem(31, worldSettings);
 
         // Statistics
         ItemStack stats = createGuiItem(Material.BOOK,
-            ChatColor.LIGHT_PURPLE + "Statistics",
-            ChatColor.GRAY + "View respawn point usage stats");
+            plugin.getMessageManager().getMessage("gui.admin.statistics.title"),
+            plugin.getMessageManager().getMessage("gui.admin.statistics.lore"));
         gui.setItem(13, stats);
 
         player.openInventory(gui);

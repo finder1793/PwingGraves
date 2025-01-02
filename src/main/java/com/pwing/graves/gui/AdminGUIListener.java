@@ -16,22 +16,32 @@ public class AdminGUIListener implements Listener {
     public AdminGUIListener(PwingGraves plugin) {
         this.plugin = plugin;
     }
-
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player)) return;
-        
-        if (!event.getView().getTitle().equals(ChatColor.RED + "Admin Control Panel")) return;
+        if (!(event.getWhoClicked() instanceof Player)) {
+            return;
+        }
+        Player player = (Player) event.getWhoClicked();
+
+        if (!event.getView().getTitle().equals(plugin.getMessageManager().getMessage("gui.admin.title"))) {
+            return;
+        }
 
         event.setCancelled(true);
 
-        if (!player.hasPermission("pwinggraves.admin")) return;
+        if (!player.hasPermission("pwinggraves.admin")) {
+            return;
+        }
 
-        switch (event.getSlot()) {
-            case 20 -> handleWorldPointsManager(player, event.getClick());
-            case 24 -> createNewPoint(player);
-            case 31 -> openWorldSettings(player);
-            case 13 -> openStatistics(player);
+        int slot = event.getSlot();
+        if (slot == 20) {
+            handleWorldPointsManager(player, event.getClick());
+        } else if (slot == 24) {
+            createNewPoint(player);
+        } else if (slot == 31) {
+            openWorldSettings(player);
+        } else if (slot == 13) {
+            openStatistics(player);
         }
     }
 

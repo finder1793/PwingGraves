@@ -20,6 +20,7 @@ import ch.njol.skript.Skript;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import java.util.Arrays;
+import com.pwing.graves.utils.MessageManager;
 import java.io.File;
 import com.pwing.graves.config.WorldConfig;
 import com.pwing.graves.integrations.skript.EffectCreatePoint;
@@ -35,6 +36,7 @@ public final class PwingGraves extends JavaPlugin implements Listener {
     private AdminGUI adminGUI;
     private PlayerManager playerManager;
     private RespawnEconomy respawnEconomy;
+    private MessageManager messageManager;
     @Override
     public void onEnable() {
         getServer().getConsoleSender().sendMessage(ChatColor.DARK_GRAY + "----------------------------------------");
@@ -56,6 +58,7 @@ public final class PwingGraves extends JavaPlugin implements Listener {
         getCommand("graves").setExecutor(new GravesCommand(this));
 
         saveDefaultConfig();
+        messageManager = new MessageManager(this);
         loadRespawnPoints();
 
         if (getServer().getPluginManager().getPlugin("Vault") != null) {
@@ -71,6 +74,11 @@ public final class PwingGraves extends JavaPlugin implements Listener {
         registerSkript();
     }
 
+
+
+    public MessageManager getMessageManager() {
+        return messageManager;
+    }
     @Override
     public void onDisable() {
         worldConfigManager.saveAll();
