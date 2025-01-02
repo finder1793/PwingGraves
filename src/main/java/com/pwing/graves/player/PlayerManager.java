@@ -8,6 +8,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import java.util.*;
+import java.io.File;
+import java.util.stream.Collectors;
 
 public class PlayerManager {
     private final PwingGraves plugin;
@@ -27,7 +29,7 @@ public class PlayerManager {
                 return i;
             }
         }
-        
+
         // Check group permissions
         ConfigurationSection groups = plugin.getConfig().getConfigurationSection("personal-respawns.groups");
         if (groups != null) {
@@ -37,7 +39,7 @@ public class PlayerManager {
                 }
             }
         }
-        
+
         return plugin.getConfig().getInt("personal-respawns.default-max-points", 3);
     }
 
@@ -90,5 +92,25 @@ public class PlayerManager {
         YamlConfiguration config = dataManager.getPlayerData(uuid);
         config.set("respawn-points", new ArrayList<>(points));
         dataManager.savePlayerData(uuid, config);
+    }
+
+    public void loadAllPlayerData() {
+        File playerDataFolder = new File(plugin.getDataFolder(), "playerdata");
+        if (playerDataFolder.exists()) {
+            for (File file : playerDataFolder.listFiles()) {
+                String uuidString = file.getName().replace(".yml", "");
+                UUID uuid = UUID.fromString(uuidString);
+                YamlConfiguration config = dataManager.getPlayerData(uuid);
+
+                if (config.contains("respawn-points")) {
+                    List<?> points = config.getList("respawn-points");
+                    Set<RespawnPoint> respawnPoints = points.stream()
+                            .filter(p -> p instanceof RespawnPoint)
+                            .map(p -> (RespawnPoint) p)
+                            .collect(Collectors.toSet());
+                    personalRespawnPoints.put(uuid, respawnPoints);
+                }
+            }
+        }
     }
 }
