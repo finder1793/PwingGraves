@@ -1,0 +1,76 @@
+messages:
+  prefix: "&6[PwingGraves] &r"
+  respawn-point:
+    added: "%prefix%&aRespawn point &e%name% &ahas been created!"
+    removed: "%prefix%&cRespawn point &e%name% &chas been removed!"
+    teleported: "%prefix%&7Teleported to respawn point: &e%name%"
+    not-found: "%prefix%&cRespawn point not found!"
+    list-header: "%prefix%&6Respawn Points in &e%world%&6:"
+    list-format: "&e- %name% &7(%x%, %y%, %z%)"
+    list-empty: "%prefix%&eNo respawn points found in this world."
+  permission:
+    denied: "%prefix%&cYou don't have permission to do this!"
+    list: "%prefix%&cYou don't have permission to list respawn points!"
+    tp: "%prefix%&cYou don't have permission to teleport to respawn points!"
+    admin: "%prefix%&cYou don't have permission to access the admin menu!"
+    menu: "%prefix%&cYou don't have permission to access the respawn menu!"
+  commands:
+    usage: "%prefix%&cUsage: /graves <add|remove|list|tp> <name>"
+    help-header: "&6PwingGraves Commands:"
+    help-add: "&e/graves add <name> &7- Add a respawn point"
+    help-remove: "&e/graves remove <name> &7- Remove a respawn point"
+    help-list: "&e/graves list &7- List all respawn points"
+    help-tp: "&e/graves tp <name> &7- Teleport to a respawn point"
+    help-admin: "&e/graves admin &7- Open the admin menu"
+  messages:
+    gui:
+      admin:
+        title: "&8Admin Management"
+        world-points:
+          title: "&6World Points Manager"
+          lore:
+            - "&7Manage all world respawn points"
+            - "&eLeft-click to view/edit"
+            - "&cRight-click to remove"
+        new-point:
+          title: "&aCreate New Point"
+          lore:
+            - "&7Create a new respawn point"
+            - "&eClick to create at your location"
+        world-settings:
+          title: "&bWorld Settings"
+          lore:
+            - "&7Configure world-specific settings"
+        statistics:
+          title: "&dStatistics"
+          lore:
+            - "&7View respawn point usage stats"
+      respawn-title: "&8Respawn Points Menu"
+      next-page: "&aNext Page"
+      previous-page: "&aPrevious Page"
+      personal-points:
+        title: "&aPersonal Points"
+        lore:
+          - "&7Click to manage your personal respawn points"
+          - "&eYou have: %count% points"
+      world-points:
+        title: "&bWorld Points"
+        lore:
+          - "&7Click to view available world respawn points"
+      quick-travel:
+        title: "&dQuick Travel"
+        lore:
+          - "&7Teleport to discovered respawn points"
+      categories:
+        title: "&6Categories"
+        lore:
+          - "&7Browse respawn points by category"  economy:
+    insufficient-funds: "%prefix%&cYou need &e%cost% &cto do this!"
+    cost-create: "%prefix%&7Cost to create: &e%cost%"
+    cost-teleport: "%prefix%&7Cost to teleport: &e%cost%"
+  cooldown:
+    wait: "%prefix%&cPlease wait &e%time% &cbefore using this again"
+    bypass: "%prefix%&aYou bypassed the cooldown"
+  world:
+    disabled: "%prefix%&cRespawn points are disabled in this world"
+    no-points: "%prefix%&cNo respawn points available, using world spawn"    help-menu: "&e/graves menu &7- Open the respawn menu"    help-tp: "&e/graves tp <name> &7- Teleport to a respawn point"
