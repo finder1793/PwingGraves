@@ -22,49 +22,50 @@ messages:
     help-list: "&e/graves list &7- List all respawn points"
     help-tp: "&e/graves tp <name> &7- Teleport to a respawn point"
     help-admin: "&e/graves admin &7- Open the admin menu"
-  messages:
-    gui:
-      admin:
-        title: "&8Admin Management"
-        world-points:
-          title: "&6World Points Manager"
-          lore:
-            - "&7Manage all world respawn points"
-            - "&eLeft-click to view/edit"
-            - "&cRight-click to remove"
-        new-point:
-          title: "&aCreate New Point"
-          lore:
-            - "&7Create a new respawn point"
-            - "&eClick to create at your location"
-        world-settings:
-          title: "&bWorld Settings"
-          lore:
-            - "&7Configure world-specific settings"
-        statistics:
-          title: "&dStatistics"
-          lore:
-            - "&7View respawn point usage stats"
-      respawn-title: "&8Respawn Points Menu"
-      next-page: "&aNext Page"
-      previous-page: "&aPrevious Page"
-      personal-points:
-        title: "&aPersonal Points"
-        lore:
-          - "&7Click to manage your personal respawn points"
-          - "&eYou have: %count% points"
+    help-menu: "&e/graves menu &7- Open the respawn menu"
+  gui:
+    admin:
+      title: "&8Admin Management"
       world-points:
-        title: "&bWorld Points"
+        title: "&6World Points Manager"
         lore:
-          - "&7Click to view available world respawn points"
-      quick-travel:
-        title: "&dQuick Travel"
+          - "&7Manage all world respawn points"
+          - "&eLeft-click to view/edit"
+          - "&cRight-click to remove"
+      new-point:
+        title: "&aCreate New Point"
         lore:
-          - "&7Teleport to discovered respawn points"
-      categories:
-        title: "&6Categories"
+          - "&7Create a new respawn point"
+          - "&eClick to create at your location"
+      world-settings:
+        title: "&bWorld Settings"
         lore:
-          - "&7Browse respawn points by category"  economy:
+          - "&7Configure world-specific settings"
+      statistics:
+        title: "&dStatistics"
+        lore:
+          - "&7View respawn point usage stats"
+    respawn-title: "&8Respawn Points Menu"
+    next-page: "&aNext Page"
+    previous-page: "&aPrevious Page"
+    personal-points:
+      title: "&aPersonal Points"
+      lore:
+        - "&7Click to manage your personal respawn points"
+        - "&eYou have: %count% points"
+    world-points:
+      title: "&bWorld Points"
+      lore:
+        - "&7Click to view available world respawn points"
+    quick-travel:
+      title: "&dQuick Travel"
+      lore:
+        - "&7Teleport to discovered respawn points"
+    categories:
+      title: "&6Categories"
+      lore:
+        - "&7Browse respawn points by category"
+  economy:
     insufficient-funds: "%prefix%&cYou need &e%cost% &cto do this!"
     cost-create: "%prefix%&7Cost to create: &e%cost%"
     cost-teleport: "%prefix%&7Cost to teleport: &e%cost%"
@@ -73,4 +74,4 @@ messages:
     bypass: "%prefix%&aYou bypassed the cooldown"
   world:
     disabled: "%prefix%&cRespawn points are disabled in this world"
-    no-points: "%prefix%&cNo respawn points available, using world spawn"    help-menu: "&e/graves menu &7- Open the respawn menu"    help-tp: "&e/graves tp <name> &7- Teleport to a respawn point"
+    no-points: "%prefix%&cNo respawn points available, using world spawn"
