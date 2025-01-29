@@ -1,20 +1,16 @@
 package com.pwing.graves.integrations.skript;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.pwing.graves.PwingGraves;
-import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import com.pwing.graves.respawn.RespawnPoint;
-import com.pwing.graves.PwingGraves;
 
-public class EffectCreatePoint extends Effect {
+public class EffectTeleportToPoint extends Effect {
+    private Expression<Player> player;
     private Expression<String> name;
-    private Expression<Location> location;
-
     private static PwingGraves plugin;
 
     public static void setPlugin(PwingGraves pl) {
@@ -23,27 +19,23 @@ public class EffectCreatePoint extends Effect {
 
     @Override
     protected void execute(Event event) {
+        Player p = player.getSingle(event);
         String pointName = name.getSingle(event);
-        Location pointLocation = location.getSingle(event);
-        if (pointName != null && pointLocation != null) {
-            plugin.getRespawnManager().addRespawnPoint(
-                pointLocation.getWorld().getName(),
-                new RespawnPoint(pointName, pointLocation)
-            );
+        if (p != null && pointName != null) {
+            plugin.getRespawnManager().teleportPlayerToRespawnPoint(p, pointName);
         }
     }
+
     @Override
     public String toString(Event event, boolean debug) {
-        return "create respawn point " + name.toString(event, debug) + " at " + location.toString(event, debug);
+        return "teleport player " + player.toString(event, debug) + " to respawn point " + name.toString(event, debug);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        name = (Expression<String>) exprs[0];
-        location = (Expression<Location>) exprs[1];
+        player = (Expression<Player>) exprs[0];
+        name = (Expression<String>) exprs[1];
         return true;
     }
 }
-
-

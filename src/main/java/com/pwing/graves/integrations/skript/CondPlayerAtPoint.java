@@ -1,14 +1,15 @@
 package com.pwing.graves.integrations.skript;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
-import org.bukkit.event.Event;
 import com.pwing.graves.PwingGraves;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 
-public class CondRespawnPointExists extends Condition {
+public class CondPlayerAtPoint extends Condition {
+    private Expression<Player> player;
     private Expression<String> name;
     private static PwingGraves plugin;
 
@@ -18,19 +19,21 @@ public class CondRespawnPointExists extends Condition {
 
     @Override
     public boolean check(Event event) {
+        Player p = player.getSingle(event);
         String pointName = name.getSingle(event);
-        return pointName != null && plugin.getRespawnManager().pointExists(pointName);
+        return p != null && pointName != null && plugin.getRespawnManager().isPlayerAtRespawnPoint(p, pointName);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        name = (Expression<String>) exprs[0];
+        player = (Expression<Player>) exprs[0];
+        name = (Expression<String>) exprs[1];
         return true;
     }
 
     @Override
     public String toString(Event event, boolean debug) {
-        return "respawn point " + name.toString(event, debug) + " exists";
+        return "player " + player.toString(event, debug) + " is at respawn point " + name.toString(event, debug);
     }
 }

@@ -16,6 +16,7 @@ import com.pwing.graves.player.PlayerManager;
 import com.pwing.graves.economy.RespawnEconomy;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import com.pwing.graves.integrations.skript.SkriptIntegration;
 import ch.njol.skript.Skript;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -72,6 +73,8 @@ public final class PwingGraves extends JavaPlugin implements Listener {
         }
 
         registerSkript();
+        SkriptIntegration.registerEffects();
+        getLogger().info("PwingGraves plugin enabled successfully.");
     }
 
 
@@ -83,6 +86,7 @@ public final class PwingGraves extends JavaPlugin implements Listener {
     public void onDisable() {
         worldConfigManager.saveAll();
         getLogger().info("PwingGraves has been disabled!");
+        getLogger().info("PwingGraves plugin disabled successfully.");
     }
 
     public AdminGUI getAdminGUI() {
@@ -151,8 +155,6 @@ public final class PwingGraves extends JavaPlugin implements Listener {
             getLogger().info("Registering Skript support...");
             EffectCreatePoint.setPlugin(this);
             CondRespawnPointExists.setPlugin(this);
-            Skript.registerEffect(EffectCreatePoint.class);
-            Skript.registerCondition(CondRespawnPointExists.class);
         }
     }
 }

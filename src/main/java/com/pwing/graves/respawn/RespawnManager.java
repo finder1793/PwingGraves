@@ -103,4 +103,27 @@ public class RespawnManager {
             .findFirst()
             .orElse(null);
     }
+
+    public boolean isPlayerAtRespawnPoint(Player player, String pointName) {
+        Location playerLocation = player.getLocation();
+        return worldRespawnPoints.getOrDefault(playerLocation.getWorld().getName(), new HashSet<>())
+                .stream()
+                .anyMatch(point -> point.getName().equals(pointName) &&
+                        point.getLocation().distanceSquared(playerLocation) < 1);
+    }
+
+    public void teleportPlayerToRespawnPoint(Player player, String pointName) {
+        RespawnPoint point = worldRespawnPoints.getOrDefault(player.getWorld().getName(), new HashSet<>())
+                .stream()
+                .filter(p -> p.getName().equals(pointName))
+                .findFirst()
+                .orElse(null);
+        if (point != null) {
+            player.teleport(point.getLocation());
+        }
+    }
+
+    public Set<String> getWorldNames() {
+        return worldRespawnPoints.keySet();
+    }
 }
