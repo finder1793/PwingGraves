@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.pwing.graves"
-version = "1.1.1"
+version = "1.1.2"
 
 repositories {
     mavenCentral()
@@ -29,7 +29,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.google.guava:guava:32.1.3-jre")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
-
+    compileOnly(files("libs/PwingEco-1.1.3.jar")) // Add PwingEco as a local dependency
 }
 java {
     toolchain {

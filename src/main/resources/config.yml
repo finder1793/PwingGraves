@@ -35,9 +35,11 @@ messages:
 
 economy:
   enabled: true
+  currency: "default" # Currency name for PwingEco
   costs:
     point-creation: 1000.0
     teleport: 100.0
+    respawn: 100.0
 
 integrations:
   discord:

@@ -34,6 +34,8 @@ import com.pwing.graves.integrations.skript.EffectCreatePoint;
 import com.pwing.graves.integrations.skript.CondRespawnPointExists;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventPriority;
+import com.pwing.graves.integrations.PwingEcoIntegration;
+import com.pwing.pwingeco.PwingEco;
 
 public final class PwingGraves extends JavaPlugin implements Listener {
 
@@ -68,6 +70,12 @@ public final class PwingGraves extends JavaPlugin implements Listener {
         messageManager = new MessageManager(this);
         loadRespawnPoints();
 
+        PwingEcoIntegration pwingEcoIntegration = null;
+        if (getServer().getPluginManager().getPlugin("PwingEco") != null) {
+            getLogger().info("PwingEco detected. Enabling PwingEco integration...");
+            pwingEcoIntegration = new PwingEcoIntegration((PwingEco) getServer().getPluginManager().getPlugin("PwingEco"));
+        }
+
         if (getServer().getPluginManager().getPlugin("Vault") != null) {
             RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
             if (rsp != null) {
@@ -75,7 +83,8 @@ public final class PwingGraves extends JavaPlugin implements Listener {
                 double createCost = getConfig().getDouble("economy.costs.point-creation");
                 double teleportCost = getConfig().getDouble("economy.costs.teleport");
                 double respawnCost = getConfig().getDouble("economy.costs.respawn", 100.0); // Default to 100.0 if not set
-                respawnEconomy = new RespawnEconomy(economy, createCost, teleportCost, respawnCost);
+                String currencyName = getConfig().getString("economy.currency", "default"); // Default currency for PwingEco
+                respawnEconomy = new RespawnEconomy(economy, pwingEcoIntegration, createCost, teleportCost, respawnCost, currencyName);
             }
         }
 
