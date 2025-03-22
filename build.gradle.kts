@@ -14,6 +14,7 @@ repositories {
     maven("https://repo.helpch.at/releases")
     maven("https://repo.skriptlang.org/releases")
     maven("https://maven.enginehub.org/repo/")
+    maven("https://repo.nexomc.com/releases")
 }
 
 dependencies {
@@ -22,6 +23,9 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.11.5")
     compileOnly("com.github.SkriptLang:Skript:2.6.4")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.7")
+    compileOnly("com.nexomc:nexo:1.2.0") {
+        exclude("*", "*")
+    }
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.google.guava:guava:32.1.3-jre")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")

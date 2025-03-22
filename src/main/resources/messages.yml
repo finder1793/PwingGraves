@@ -2,6 +2,7 @@ messages:
   prefix: "&6[PwingGraves] &r"
   respawn-point:
     added: "%prefix%&aRespawn point &e%name% &ahas been created!"
+    block-created: "%prefix%&aRespawn point created by placing a block: &e%name%"
     removed: "%prefix%&cRespawn point &e%name% &chas been removed!"
     teleported: "%prefix%&7Teleported to respawn point: &e%name%"
     not-found: "%prefix%&cRespawn point not found!"
@@ -69,6 +70,8 @@ messages:
     insufficient-funds: "%prefix%&cYou need &e%cost% &cto do this!"
     cost-create: "%prefix%&7Cost to create: &e%cost%"
     cost-teleport: "%prefix%&7Cost to teleport: &e%cost%"
+    respawn-cost-deducted: "%prefix%&aRespawn cost deducted: &e%cost%"
+    insufficient-funds: "%prefix%&cYou need at least &e%cost% &cto respawn!"
   cooldown:
     wait: "%prefix%&cPlease wait &e%time% &cbefore using this again"
     bypass: "%prefix%&aYou bypassed the cooldown"

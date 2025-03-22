@@ -11,9 +11,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import java.util.List;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.pwing.graves.player.PlayerManager;
 import com.pwing.graves.economy.RespawnEconomy;
+import com.pwing.graves.listeners.BlockListener;
+import com.pwing.graves.listeners.NexoFurnitureListener;
+import com.pwing.graves.listeners.BlockPlaceListener;
+import com.pwing.graves.listeners.NexoBlockListener;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import com.pwing.graves.integrations.skript.SkriptIntegration;
@@ -68,13 +73,22 @@ public final class PwingGraves extends JavaPlugin implements Listener {
                 Economy economy = rsp.getProvider();
                 double createCost = getConfig().getDouble("economy.costs.point-creation");
                 double teleportCost = getConfig().getDouble("economy.costs.teleport");
-                respawnEconomy = new RespawnEconomy(economy, createCost, teleportCost);
+                double respawnCost = getConfig().getDouble("economy.costs.respawn", 100.0); // Default to 100.0 if not set
+                respawnEconomy = new RespawnEconomy(economy, createCost, teleportCost, respawnCost);
             }
         }
 
         registerSkript();
         SkriptIntegration.registerEffects();
         getLogger().info("PwingGraves plugin enabled successfully.");
+        getServer().getPluginManager().registerEvents(new BlockListener(this), this);
+
+        if (getServer().getPluginManager().getPlugin("Nexo") != null) {
+            getLogger().info("Nexo detected. Registering NexoFurnitureListener...");
+            getServer().getPluginManager().registerEvents(new NexoFurnitureListener(this), this);
+        } else {
+            getLogger().info("Nexo not detected. Skipping NexoFurnitureListener registration.");
+        }
     }
 
 
@@ -102,8 +116,12 @@ public final class PwingGraves extends JavaPlugin implements Listener {
     }
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        if (event.getPlayer().getLastDeathLocation() != null) {
-            Location respawnLocation = respawnManager.getNearestRespawnPoint(event.getPlayer().getLastDeathLocation());
+        Player player = event.getPlayer();
+        if (player.getLastDeathLocation() != null) {
+            Location respawnLocation = respawnManager.getNearestRespawnPoint(player.getLastDeathLocation());
+            if (respawnEconomy != null && !respawnEconomy.chargeForRespawn(player)) {
+                respawnLocation = player.getWorld().getSpawnLocation(); // Default to world spawn
+            }
             event.setRespawnLocation(respawnLocation);
         }
     }

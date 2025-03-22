@@ -13,12 +13,12 @@ public class GravesPlaceholderExpansion extends PlaceholderExpansion {
 
     @Override
     public String getIdentifier() {
-        return "graves";
+        return "pwinggraves";
     }
 
     @Override
     public String getAuthor() {
-        return "YourName";
+        return "finder17";
     }
 
     @Override
