@@ -2,6 +2,7 @@ messages:
   prefix: "&6[PwingGraves] &r"
   respawn-point:
     added: "%prefix%&aRespawn point &e%name% &ahas been created!"
+    personal-added: "%prefix%&aPersonal respawn point set at &e%location%!"
     block-created: "%prefix%&aRespawn point created by placing a block: &e%name%"
     removed: "%prefix%&cRespawn point &e%name% &chas been removed!"
     teleported: "%prefix%&7Teleported to respawn point: &e%name%"

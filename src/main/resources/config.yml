@@ -5,6 +5,10 @@ settings:
     enabled: true
     material: "nexo:beacon" # The Nexo furniture ID that creates a respawn point
     name-prefix: "FurnitureRespawn_" # Prefix for respawn point names created by furniture
+  personal-respawn-material:
+    enabled: true
+    material: "RESPAWN_ANCHOR" # Configurable material (vanilla or Nexo)
+    nexo-material: false # Set to true if using a Nexo block or furniture
 
 cooldowns:
   respawn: 300 # Cooldown in seconds between respawn point usage

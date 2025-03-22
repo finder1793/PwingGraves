@@ -17,6 +17,7 @@ import com.pwing.graves.player.PlayerManager;
 import com.pwing.graves.economy.RespawnEconomy;
 import com.pwing.graves.listeners.BlockListener;
 import com.pwing.graves.listeners.NexoFurnitureListener;
+import com.pwing.graves.listeners.PersonalRespawnListener;
 import com.pwing.graves.listeners.BlockPlaceListener;
 import com.pwing.graves.listeners.NexoBlockListener;
 import net.milkbowl.vault.economy.Economy;
@@ -89,6 +90,8 @@ public final class PwingGraves extends JavaPlugin implements Listener {
         } else {
             getLogger().info("Nexo not detected. Skipping NexoFurnitureListener registration.");
         }
+
+        getServer().getPluginManager().registerEvents(new PersonalRespawnListener(this), this);
     }
 
 
